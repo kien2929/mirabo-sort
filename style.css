@@ -1,0 +1,17 @@
+#label{
+    text-align: center;
+}
+#line1{
+    text-align: center;
+}
+#line2{
+    display: none;
+    text-align: center;
+    margin-left: 250px;
+}
+.type-sort{
+    display: inline-block;
+    margin-left: 50px;
+    margin-right: 50px;
+    float: left;
+}

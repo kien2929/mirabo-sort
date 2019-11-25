@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="index.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <h1 id="label">Project 1</h1>
+    <div id="line1">
+        <span>Input</span><input id="value" value="5,4,6,8,1">
+        <input id="checkbox" type="checkbox" name="checkbox" value="sort" onclick="changeType()">
+        <span id="sort">Mặc định</span>
+        <button id="button-sort" onclick="sort()">Sort</button>
+    </div>
+    <br>
+    <div id="line2">
+        <div id="bubble" class="type-sort">
+            <div>Bubble Sort</div>
+            <br>
+            <span>Result</span>
+            <input id="bubble-value" name="sort-value" class="sort-value" value="">
+            <div id="bubble-step">
+                
+
+            </div>
+        </div>
+        <div id="quick" class="type-sort">
+            <div>Quick sort</div>
+            <br>
+            <span>Result</span>
+            <input id="quick-value" class="sort-value" value="">
+            <div id="quick-step"></div>
+        </div>
+    </div>
+</body>
+
+</html>
