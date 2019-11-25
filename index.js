@@ -25,11 +25,20 @@ const sort = async () => {
     quickStep.innerHTML = "";
 
     line2.style.display = "block";
-    arrayBuble = document.getElementById('value').value.split(",");
-    arrayQuick = document.getElementById('value').value.split(",");
+    arrayBuble = document.getElementById('value').value.split(",").map(function (item) { return parseInt(item, 10); });;
+    arrayQuick = document.getElementById('value').value.split(",").map(function (item) { return parseInt(item, 10); });;
+    startBubble = new Date();
     await bubbleSort(arrayBuble);
+    endBubble = new Date();
+    bubbleTime=endBubble.getTime() - startBubble.getTime();
+    bubbleStep.innerHTML+=`<div>Time:  ${bubbleTime}  msec</div>`
+
     right = arrayQuick.length;
+    startQuick = new Date();
     await quickSort(arrayQuick, 0, right - 1);
+    endQuick = new Date();
+    quickTime=endQuick.getTime() - startQuick.getTime();
+    quickStep.innerHTML+=`<div>Time:  ${quickTime}  msec</div>`
     document.getElementById("bubble-value").value = arrayBuble;
     document.getElementById('quick-value').value = arrayQuick;
 }
