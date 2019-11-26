@@ -5,8 +5,8 @@ function swap(a, b) {
     b = a - b;
     a = a - b;
 }
-const resetFile = () => { 
-    document.getElementById('file').value=""
+const resetFile = () => {
+    document.getElementById('file').value = ""
 }
 const chooseFile = () => {
     document.getElementById('file').files[0]
@@ -17,9 +17,7 @@ const chooseFile = () => {
         fileReader.onload = function (e) {
             document.getElementById("value").value = e.target.result;
         };
-        console.log(fileReader);
     }
-    console.clear();
 }
 const changeType = () => {
     const checkbox = document.getElementById('checkbox');
@@ -40,23 +38,29 @@ const sort = async () => {
         const quickStep = document.getElementById('quick-step');
         bubbleStep.innerHTML = "";
         quickStep.innerHTML = "";
-        line2.style.display = "block";
-        arrayBuble = document.getElementById('value').value.split(",").map(function (item) { return parseInt(item, 10); });;
-        arrayQuick = document.getElementById('value').value.split(",").map(function (item) { return parseInt(item, 10); });;
-        startBubble = new Date();
-        await bubbleSort(arrayBuble);
-        endBubble = new Date();
-        bubbleTime = endBubble.getTime() - startBubble.getTime();
-        bubbleStep.innerHTML += `<div>Time:  ${bubbleTime}  msec</div>`
 
-        right = arrayQuick.length;
-        startQuick = new Date();
-        await quickSort(arrayQuick, 0, right - 1);
-        endQuick = new Date();
-        quickTime = endQuick.getTime() - startQuick.getTime();
-        quickStep.innerHTML += `<div>Time:  ${quickTime}  msec</div>`
-        document.getElementById("bubble-value").value = arrayBuble;
-        document.getElementById('quick-value').value = arrayQuick;
+        arrayBuble = await document.getElementById('value').value.split(",").map(function (item) { return parseInt(item, 10); });
+        console.log(arrayBuble[0]);
+        if (arrayBuble[0]-arrayBuble[0]+1) {
+            arrayQuick = document.getElementById('value').value.split(",").map(function (item) { return parseInt(item, 10); });
+            line2.style.display = "block";
+            startBubble = new Date();
+            await bubbleSort(arrayBuble);
+            endBubble = new Date();
+            bubbleTime = endBubble.getTime() - startBubble.getTime();
+            bubbleStep.innerHTML += `<div>Time:  ${bubbleTime}  msec</div>`
+
+            right = arrayQuick.length;
+            startQuick = new Date();
+            await quickSort(arrayQuick, 0, right - 1);
+            endQuick = new Date();
+            quickTime = endQuick.getTime() - startQuick.getTime();
+            quickStep.innerHTML += `<div>Time:  ${quickTime}  msec</div>`
+            document.getElementById("bubble-value").value = arrayBuble;
+            document.getElementById('quick-value').value = arrayQuick;
+        }else{
+            line2.style.display = "none";
+        }
     }
 }
 const bubbleSort = (arr) => {
