@@ -5,17 +5,19 @@ function swap(a, b) {
     b = a - b;
     a = a - b;
 }
+const resetFile = () => { 
+    document.getElementById('file').value=""
+}
 const chooseFile = () => {
+    document.getElementById('file').files[0]
     const file = document.getElementById('file').files[0];
-    if (file) {
-        if (file.type == "text/plain") {
-            let fileReader = new FileReader();
-            fileReader.readAsText(document.getElementById("file").files[0]);
-            fileReader.onload = function (e) {
-                document.getElementById("value").value = e.target.result;
-            };
-            console.log(document.getElementById("file"));
-        }
+    if (file.type == "text/plain") {
+        let fileReader = new FileReader();
+        fileReader.readAsText(document.getElementById("file").files[0]);
+        fileReader.onload = function (e) {
+            document.getElementById("value").value = e.target.result;
+        };
+        console.log(fileReader);
     }
     console.clear();
 }
