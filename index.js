@@ -1,10 +1,5 @@
 let stt = 1;
 var inc = true;
-function swap(a, b) {
-    a = a + b;
-    b = a - b;
-    a = a - b;
-}
 const resetFile = () => {
     document.getElementById('file').value = ""
 }
@@ -110,17 +105,13 @@ let partition = (arr, low, high) => {
             //Sắp xếp tăng
             if (arr[j] <= pivot) {
                 i++;
-                tmp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = tmp;
+                [arr[j],arr[i]]=[arr[i],arr[j]];
             }
         } //Sắp xếp giảm
         else {
             if (arr[j] >= pivot) {
                 i++;
-                tmp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = tmp;
+                [arr[j],arr[i]]=[arr[i],arr[j]];
             }
         }
     }
