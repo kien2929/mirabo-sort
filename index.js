@@ -41,7 +41,7 @@ const sort = async () => {
 
         arrayBuble = await document.getElementById('value').value.split(",").map(function (item) { return parseInt(item, 10); });
         console.log(arrayBuble[0]);
-        if (arrayBuble[0]-arrayBuble[0]+1) {
+        if (arrayBuble[0] - arrayBuble[0] + 1) {
             arrayQuick = document.getElementById('value').value.split(",").map(function (item) { return parseInt(item, 10); });
             line2.style.display = "block";
             startBubble = new Date();
@@ -58,7 +58,7 @@ const sort = async () => {
             quickStep.innerHTML += `<div>Time:  ${quickTime}  msec</div>`
             document.getElementById("bubble-value").value = arrayBuble;
             document.getElementById('quick-value').value = arrayQuick;
-        }else{
+        } else {
             line2.style.display = "none";
         }
     }
@@ -104,15 +104,18 @@ const quickSort = async (arr, low, high) => {
 let partition = (arr, low, high) => {
     pivot = arr[high];
     i = (low - 1);
+    //Khởi tạo giá trị ban đầu của partition
     for (let j = low; j < high; j++) {
         if (inc == true) {
+            //Sắp xếp tăng
             if (arr[j] <= pivot) {
                 i++;
                 tmp = arr[i];
                 arr[i] = arr[j];
                 arr[j] = tmp;
             }
-        } else {
+        } //Sắp xếp giảm
+        else {
             if (arr[j] >= pivot) {
                 i++;
                 tmp = arr[i];
