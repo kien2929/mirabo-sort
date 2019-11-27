@@ -1,9 +1,9 @@
 let stt = 1;
 var inc = true;
-function swap(a, b) {
-    a = a + b;
-    b = a - b;
-    a = a - b;
+function swap(arr,a, b) {
+    temp = arr[a];
+    arr[a]=arr[b];
+    arr[b]=temp;
 }
 const resetFile = () => {
     document.getElementById('file').value = ""
@@ -88,7 +88,7 @@ const bubbleSort = (arr) => {
         }
     }
 }
-const quickSort = async (arr, low, high) => {
+const quickSort =  (arr, low, high) => {
     const quickStep = document.getElementById('quick-step');
     quickStep.innerHTML += `<br>
         <span>Step ${stt}</span><input value="${arr}">
@@ -96,33 +96,23 @@ const quickSort = async (arr, low, high) => {
     stt++;
     if (low < high) {
         pi = partition(arr, low, high);
-        await quickSort(arr, low, pi - 1);
-        await quickSort(arr, pi + 1, high);
+         quickSort(arr, low, pi - 1);
+         quickSort(arr, pi + 1, high);
 
     }
 }
-let partition = (arr, low, high) => {
-    pivot = arr[high];
-    i = (low - 1);
-    for (let j = low; j < high; j++) {
-        if (inc == true) {
-            if (arr[j] <= pivot) {
-                i++;
-                tmp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = tmp;
-            }
-        } else {
-            if (arr[j] >= pivot) {
-                i++;
-                tmp = arr[i];
-                arr[i] = arr[j];
-                arr[j] = tmp;
-            }
-        }
+let partition =  (arr, low, high) => {
+    pivot = arr[high];    // pivot
+    left = low;
+    right = high - 1;
+    while(true){
+        while(left <= right && arr[left] < pivot) left++;
+        while(right >= left && arr[right] > pivot) right--;
+        if (left >= right) break;
+        swap(arr, left,right);
+        left++;
+        right--;
     }
-    temp = arr[i + 1];
-    arr[i + 1] = arr[high];
-    arr[high] = temp;
-    return i + 1;
-} 
+    swap(arr, left,right);
+    return left;
+}
