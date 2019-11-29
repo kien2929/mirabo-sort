@@ -1,9 +1,9 @@
 let stt = 1;
 var inc = true;
-function swap(arr,a, b) {
+function swap(arr, a, b) {
     temp = arr[a];
-    arr[a]=arr[b];
-    arr[b]=temp;
+    arr[a] = arr[b];
+    arr[b] = temp;
 }
 const resetFile = () => {
     document.getElementById('file').value = ""
@@ -40,25 +40,26 @@ const sort = async () => {
         quickStep.innerHTML = "";
 
         arrayBuble = await document.getElementById('value').value.split(",").map(function (item) { return parseInt(item, 10); });
-        console.log(arrayBuble[0]);
-        if (arrayBuble[0]-arrayBuble[0]+1) {
+        if (arrayBuble[0] - arrayBuble[0] + 1) {
             arrayQuick = document.getElementById('value').value.split(",").map(function (item) { return parseInt(item, 10); });
             line2.style.display = "block";
-            startBubble = new Date();
-            await bubbleSort(arrayBuble);
-            endBubble = new Date();
-            bubbleTime = endBubble.getTime() - startBubble.getTime();
-            bubbleStep.innerHTML += `<div>Time:  ${bubbleTime}  msec</div>`
+            // startBubble = new Date();
+            // await
+            bubbleSort(arrayBuble);
+            // endBubble = new Date();
+            // bubbleTime = endBubble.getTime() - startBubble.getTime();
+            // bubbleStep.innerHTML += `<div>Time:  ${bubbleTime}  msec</div>`
 
             right = arrayQuick.length;
-            startQuick = new Date();
-            await quickSort(arrayQuick, 0, right - 1);
-            endQuick = new Date();
-            quickTime = endQuick.getTime() - startQuick.getTime();
-            quickStep.innerHTML += `<div>Time:  ${quickTime}  msec</div>`
+            // startQuick = new Date();
+            // await 
+            quickSort(arrayQuick, 0, right - 1);
+            // endQuick = new Date();
+            // quickTime = endQuick.getTime() - startQuick.getTime();
+            // quickStep.innerHTML += `<div>Time:  ${quickTime}  msec</div>`
             document.getElementById("bubble-value").value = arrayBuble;
             document.getElementById('quick-value').value = arrayQuick;
-        }else{
+        } else {
             line2.style.display = "none";
         }
     }
@@ -68,51 +69,72 @@ const bubbleSort = (arr) => {
     let st = 1;
     for (let i = 0; i < arr.length; i++) {
         for (let j = 0; j < arr.length - i; j++) {
-            bubbleStep.innerHTML += `<br>
-                    <span>Step ${st}</span><input value="${arr}"><br>`;
-            st++;
+
             if (inc == true) {
 
                 if (arr[j + 1] < arr[j]) {
                     temp = arr[j + 1];
                     arr[j + 1] = arr[j];
                     arr[j] = temp;
+                    bubbleStep.innerHTML += `<br>
+                    <span>Step ${st}</span><input value="${arr}"><br>`;
+                    st++;
                 }
             } else {
                 if (arr[j + 1] > arr[j]) {
                     temp = arr[j];
                     arr[j] = arr[j + 1];
                     arr[j + 1] = temp;
+                    bubbleStep.innerHTML += `<br>
+                    <span>Step ${st}</span><input value="${arr}"><br>`;
+                    st++;
                 }
             }
         }
     }
 }
-const quickSort =  (arr, low, high) => {
-    const quickStep = document.getElementById('quick-step');
-    quickStep.innerHTML += `<br>
-        <span>Step ${stt}</span><input value="${arr}">
-        <br>`;
-    stt++;
-    if (low < high) {
-        pi = partition(arr, low, high);
-         quickSort(arr, low, pi - 1);
-         quickSort(arr, pi + 1, high);
+const quickSort = async (arr, low, high) => {
 
+    if (low <= high) {
+        let pivot = arr[Math.floor((high + low) / 2)];
+
+        let left = low;
+        let right = high;
+
+        while (left <= right) {
+            if (inc == true) {
+                while (arr[left] < pivot)
+                    left++;
+                while (arr[right] > pivot)
+                    right--;
+
+                if (left <= right) {
+                    swap(arr, left, right);
+                    left++;
+                    right--;
+                }
+                const quickStep = document.getElementById('quick-step');
+                quickStep.innerHTML += `<br><span>Step ${stt}</span><input value="${arr}"><br>`;
+                stt++;
+            } else {
+                while (arr[left] > pivot)
+                    left++;
+                while (arr[right] < pivot)
+                    right--;
+
+                if (left <= right) {
+                    swap(arr, left, right);
+                    left++;
+                    right--;
+                }
+                const quickStep = document.getElementById('quick-step');
+                quickStep.innerHTML += `<br><span>Step ${stt}</span><input value="${arr}"><br>`;
+                stt++;
+            }
+        }
+        if (low < right)
+            quickSort(arr, low, right);
+        if (high > left)
+            quickSort(arr, left, high);
     }
-}
-let partition =  (arr, low, high) => {
-    pivot = arr[high];    // pivot
-    left = low;
-    right = high - 1;
-    while(true){
-        while(left <= right && arr[left] < pivot) left++;
-        while(right >= left && arr[right] > pivot) right--;
-        if (left >= right) break;
-        swap(arr, left,right);
-        left++;
-        right--;
-    }
-    swap(arr, left,right);
-    return left;
 }
