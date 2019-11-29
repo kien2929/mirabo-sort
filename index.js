@@ -43,20 +43,9 @@ const sort = async () => {
         if (arrayBuble[0] - arrayBuble[0] + 1) {
             arrayQuick = document.getElementById('value').value.split(",").map(function (item) { return parseInt(item, 10); });
             line2.style.display = "block";
-            // startBubble = new Date();
-            // await
             bubbleSort(arrayBuble);
-            // endBubble = new Date();
-            // bubbleTime = endBubble.getTime() - startBubble.getTime();
-            // bubbleStep.innerHTML += `<div>Time:  ${bubbleTime}  msec</div>`
-
-            right = arrayQuick.length;
-            // startQuick = new Date();
-            // await 
+            right = arrayQuick.length;           
             quickSort(arrayQuick, 0, right - 1);
-            // endQuick = new Date();
-            // quickTime = endQuick.getTime() - startQuick.getTime();
-            // quickStep.innerHTML += `<div>Time:  ${quickTime}  msec</div>`
             document.getElementById("bubble-value").value = arrayBuble;
             document.getElementById('quick-value').value = arrayQuick;
         } else {
